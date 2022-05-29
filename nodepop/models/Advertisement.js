@@ -8,7 +8,7 @@ const advertisementSchema=mongoose.Schema({
     image:String,
     tags:Array
 } , { 
-    collection:"advertisements" //aqui va el nombre de la tabla a la que se conectarà
+    collection:"advertisements" //aqui va el nombre de la collecion
 })
 
 //creo el modelo con el esquema previamente definido
