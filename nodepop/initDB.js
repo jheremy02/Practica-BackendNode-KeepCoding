@@ -12,7 +12,7 @@ dbConnection.once("open",()=>{
 const Advertisement =require("./models/Advertisement.js")
 
 // cargar datos de inicio
-const advertisementData=require("./initAnnoucement.json")
+const advertisementData=require("./initAdvertisements.json")
 
 
 
