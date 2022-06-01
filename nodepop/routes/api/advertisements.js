@@ -7,7 +7,7 @@ const Advertisement=require("../../models/Advertisement.js")
 
 //GET obtener anuncios
 router.get("/",async (req,res)=>{
-    const advertisements= await Advertisement.find()
+    const advertisements= await Advertisement.list()
     res.json(advertisements)
 })
 
