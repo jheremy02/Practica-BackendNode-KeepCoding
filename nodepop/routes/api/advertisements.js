@@ -7,7 +7,10 @@ const Advertisement=require("../../models/Advertisement.js")
 
 //GET obtener anuncios
 router.get("/",async (req,res)=>{
-    const advertisements= await Advertisement.list()
+
+    const filter=req.query
+    console.log(filter)
+    const advertisements= await Advertisement.list(filter)
     res.json(advertisements)
 })
 
@@ -28,7 +31,7 @@ router.post("/",async (req,res,next)=>{
     try {
         
         const advertisementData=req.body;
-        advertisementData.tags=advertisementData.tags.split(",")
+
     
         //instancio un modelo de anuncio
         const advertisement=new Advertisement(advertisementData)

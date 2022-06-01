@@ -15,10 +15,21 @@ const advertisementSchema=mongoose.Schema({
 
 
 
-advertisementSchema.statics.list=function () {
+advertisementSchema.statics.list=function (filter) {
+
+
+    let searchByTags={};
+    if (filter.tags) {
+        searchByTags={tags:{$in:filter.tags}}
+    }
+
+    let searchByType={}
+
+    if (filter.type_advertisement) {
+        searchByType={type_advertisement:filter.type_advertisement}
+    }
     
-    const query=Advertisement.find()
-    console.log(query)
+    const query=Advertisement.find({...searchByTags,...searchByType})
     return query.exec().then(data=>{
         data.forEach(row=>{
             row.image=row.image ? path.join('/images/advertisements/',row.image) : null
