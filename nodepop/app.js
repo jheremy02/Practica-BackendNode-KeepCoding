@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+const {isAPIRequest}=require('./lib/utils.js')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -31,13 +31,38 @@ app.use(function(req, res, next) {
 });
 
 // error handler
+// error handler
 app.use(function(err, req, res, next) {
+
+  if (err.array) {
+
+    //error de validacion
+    err.status=422;
+
+    const errInfo=err.array({onlyFirstError:true})[0]
+
+    console.log(errInfo)
+    err.message=`${errInfo.location}   ${errInfo.param} - ${errInfo.msg}`;
+  }
+
+  res.status(err.status || 500);
+
+  // si es un error en el API responfo json
+  console.log(req.originalUrl)
+
+  if (isAPIRequest(req)) {
+    
+    res.json({error:err.message})
+    return;
+  }
+
+
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
+  
   res.render('error');
 });
 
