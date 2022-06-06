@@ -1,0 +1,47 @@
+<% include _header.ejs  %> 
+<body>
+    <header>
+        <nav>
+            <h1>NODEPOP</h1>
+        </nav>
+    </header>
+    <main>
+        <div class="advertisements-section">
+            <div class="advertisements-container">
+                <table class="table table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Tags</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <% advertisements.forEach((advertisement,idx) => { %>
+                            <tr>
+                                <th scope="row"><%= idx+1 %> </th>
+                                <td><%= advertisement.name %> </td>
+                                <td><%= advertisement.type_advertisement %></td>
+                                <td> s/. <%= advertisement.price %></td>
+                                <td><img width="50px" src="<%= advertisement.image %>" alt=""></td>
+                                <td><%= advertisement.tags %></td>
+                              </tr>
+                        <% }) %>
+                      
+                    </tbody>
+                  </table>
+
+                  <ul>
+                    <li><a href="?">Todos (max. 1000)</a></li>
+                    <li><a href="?start=10&limit=10">Paginado</a></li>
+                    <li><a href="?sort=price">Ordenado por precio ascendente</a></li>
+                    <li><a href="?sort=-price">Ordenado por precio descendente</a></li>
+                    <li><a href="?tags=lifestyle">Con tag lifestyle</a></li>
+                  </ul>
+            </div>
+        </div>
+    </main>
+</body>
