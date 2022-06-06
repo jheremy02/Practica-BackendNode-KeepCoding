@@ -3,13 +3,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+require('mongoose')
+require('./lib/connectMongoose.js')
+require('./models/Advertisement.js')
+
 const {isAPIRequest}=require('./lib/utils.js')
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var indexRouter = require('./routes/index.js');
+var advertisementsRouter = require('./routes/advertisements.js');
 
 
 var app = express();
-require('./lib/connectMongoose.js')
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,7 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/advertisements', advertisementsRouter);
 app.use('/api/advertisements',require("./routes/api/advertisements.js"))
 
 // catch 404 and forward to error handler
