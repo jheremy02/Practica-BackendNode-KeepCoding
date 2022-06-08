@@ -20,6 +20,8 @@ router.get("/",async (req,res,next)=>{
     res.json(advertisements)
 })
 
+
+// GET tags 
 router.get('/tags',(req,res)=>{
     
     const tags=["work","lifestyle","mobile","motor"]
@@ -27,11 +29,12 @@ router.get('/tags',(req,res)=>{
 
 })
 
+
 // GET obtener un anuncio
 
 router.get("/:id",(req,res)=>{
     const {id}=req.params;
-    const advertisement=Advertisement.findOne({id:id})
+    const advertisement=Advertisement.findOne({_id:id})
     advertisement.then((data)=>{res.json(data)})
 })
 
@@ -91,7 +94,7 @@ router.put("/:id",async (req,res,next)=>{
         //actualizar documento
         const updatedAdvertisement =await Advertisement.updateOne({_id:advertisementId},{advertisementFound,...advertisementNewData},{new:true})
 
-        //obtener el doumento actualizado
+        //obtener el documento actualizado
         const advertisementUpdated = await Advertisement.findOne({_id:advertisementId})
         res.json(advertisementUpdated)
 
@@ -125,7 +128,6 @@ router.delete("/:id",async (req,res,next)=>{
     }
 })
 
-// GET tags 
 
 
 
