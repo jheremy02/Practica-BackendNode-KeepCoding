@@ -70,4 +70,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+console.log(`servidor corriendo en el puerto ${process.env.PORT || '3000'}`)
 module.exports = app;
