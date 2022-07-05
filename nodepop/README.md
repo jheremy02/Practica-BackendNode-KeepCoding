@@ -2,6 +2,8 @@
 
 Api de servicio de de venta de articulos de segunda mano.
 
+Nodejs , Express , MongoDB
+
 ## Instalar dependencias
 
 ```sh
